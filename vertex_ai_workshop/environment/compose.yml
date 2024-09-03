@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  hoverfly:
+    image: spectolabs/hoverfly:latest
+    ports:
+      - "8888:8888"
+    environment:
+      - "HOVERFLY_ADMIN_PORT=8888"
+      - "HOVERFLY_WEB_PORT=8888"
+      - "HOVERFLY_ADMIN_TLS=false"
+      - "HOVERFLY_WEB_TLS=false"
+      - "HOVERFLY_WEB_ENABLED=true"
+      - "HOVERFLY_ADMIN_ENABLED=true"

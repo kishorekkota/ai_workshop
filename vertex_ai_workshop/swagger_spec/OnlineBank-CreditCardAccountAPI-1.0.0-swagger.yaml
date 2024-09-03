@@ -1,0 +1,193 @@
+openapi: 3.0.3
+info:
+  title: Credit Card Account Information API
+  description: API to manage and retrieve credit card account information.
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@example.com
+
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/OnlineBank/CreditCardAccount/1.0.0
+  - url: https://api.example.com/v1
+
+paths:
+  /accounts:
+    get:
+      summary: Get list of credit card accounts
+      description: Retrieve a list of credit card accounts for the authenticated user.
+      tags:
+        - Accounts
+      responses:
+        '200':
+          description: A list of credit card accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreditCardAccount'
+        '401':
+          description: Unauthorized, invalid or missing authentication token
+        '500':
+          description: Internal server error
+      security:
+        - bearerAuth: []
+
+  /accounts/{accountId}:
+    get:
+      summary: Get details of a specific credit card account
+      description: Retrieve details of a specific credit card account by its ID.
+      tags:
+        - Accounts
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the credit card account
+      responses:
+        '200':
+          description: Detailed credit card account information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditCardAccountDetails'
+        '401':
+          description: Unauthorized, invalid or missing authentication token
+        '404':
+          description: Account not found
+        '500':
+          description: Internal server error
+      security:
+        - bearerAuth: []
+
+  /accounts/{accountId}/transactions:
+    get:
+      summary: Get transactions of a specific credit card account
+      description: Retrieve transaction history for a specific credit card account.
+      tags:
+        - Transactions
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the credit card account
+        - name: startDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          description: The start date for the transaction history (YYYY-MM-DD)
+        - name: endDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          description: The end date for the transaction history (YYYY-MM-DD)
+      responses:
+        '200':
+          description: A list of transactions for the specified credit card account
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+        '401':
+          description: Unauthorized, invalid or missing authentication token
+        '404':
+          description: Account not found
+        '500':
+          description: Internal server error
+      security:
+        - bearerAuth: []
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    CreditCardAccount:
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: The ID of the credit card account
+        accountName:
+          type: string
+          description: The name of the credit card account
+        accountType:
+          type: string
+          description: The type of credit card (e.g., Visa, MasterCard)
+        balance:
+          type: number
+          format: double
+          description: The current balance of the credit card account
+        currency:
+          type: string
+          description: The currency of the balance (e.g., USD, EUR)
+        status:
+          type: string
+          description: The status of the account (e.g., Active, Suspended)
+
+    CreditCardAccountDetails:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/CreditCardAccount'
+      properties:
+        creditLimit:
+          type: number
+          format: double
+          description: The credit limit for the credit card account
+        availableCredit:
+          type: number
+          format: double
+          description: The available credit on the credit card account
+        dueDate:
+          type: string
+          format: date
+          description: The due date for the next payment
+        minimumPayment:
+          type: number
+          format: double
+          description: The minimum payment due on the account
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the transaction
+        customerId:
+          type: string
+          description: Unique identifier for the customer
+        amount:
+          type: number
+          description: The amount of the transaction
+          format: double
+        currency:
+          type: string
+          description: "Currency code (e.g., USD, EUR)"
+        status:
+          type: string
+          description: "Status of the transaction (e.g., Authorized, PreAuthorized, Captured)"
+        date:
+          type: string
+          description: Date and time when the transaction occurred
+          format: date-time
+        merchant:
+          type: string
+          description: The merchant associated with the transaction
+        description:
+          type: string
+          description: A brief description of the transaction

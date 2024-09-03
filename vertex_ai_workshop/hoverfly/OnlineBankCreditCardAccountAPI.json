@@ -1,0 +1,124 @@
+{
+  "data": {
+    "pairs": [
+      {
+        "request": {
+          "path": [
+            {
+              "value": "/accounts",
+              "matcher": "exact"
+            }
+          ],
+          "method": [
+            {
+              "value": "GET",
+              "matcher": "exact"
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "encodedBody": false,
+          "body": "[
+            {
+              \"accountId\": \"1234567890\",
+              \"accountName\": \"My Credit Card\",
+              \"accountType\": \"Visa\",
+              \"balance\": 1000.00,
+              \"currency\": \"USD\",
+              \"status\": \"Active\"
+            },
+            {
+              \"accountId\": \"9876543210\",
+              \"accountName\": \"My Other Card\",
+              \"accountType\": \"MasterCard\",
+              \"balance\": 500.00,
+              \"currency\": \"USD\",
+              \"status\": \"Active\"
+            }
+          ]"
+        }
+      },
+      {
+        "request": {
+          "path": [
+            {
+              "value": "/accounts/[^/]+",
+              "matcher": "regex"
+            }
+          ],
+          "method": [
+            {
+              "value": "GET",
+              "matcher": "exact"
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "encodedBody": false,
+          "body": {
+            "accountId": "1234567890",
+            "accountName": "My Credit Card",
+            "accountType": "Visa",
+            "balance": 1000.00,
+            "currency": "USD",
+            "status": "Active",
+            "creditLimit": 10000.00,
+            "availableCredit": 9000.00,
+            "dueDate": "2024-03-15",
+            "minimumPayment": 100.00
+          }
+        }
+      },
+      {
+        "request": {
+          "path": [
+            {
+              "value": "/accounts/[^/]+/transactions",
+              "matcher": "regex"
+            }
+          ],
+          "method": [
+            {
+              "value": "GET",
+              "matcher": "exact"
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "encodedBody": false,
+          "body": [
+            {
+              "id": "1234567890",
+              "customerId": "1112223334",
+              "amount": 25.00,
+              "currency": "USD",
+              "status": "Captured",
+              "date": "2024-03-10T10:00:00Z",
+              "merchant": "Amazon",
+              "description": "Purchase at Amazon"
+            },
+            {
+              "id": "9876543210",
+              "customerId": "1112223334",
+              "amount": 50.00,
+              "currency": "USD",
+              "status": "Authorized",
+              "date": "2024-03-08T14:30:00Z",
+              "merchant": "Starbucks",
+              "description": "Coffee purchase at Starbucks"
+            }
+          ]
+        }
+      }
+    ],
+    "globalActions": {
+      "delays": []
+    }
+  },
+  "meta": {
+    "schemaVersion": "v5.3"
+  }
+}

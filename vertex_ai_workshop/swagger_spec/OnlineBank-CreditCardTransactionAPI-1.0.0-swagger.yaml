@@ -1,0 +1,176 @@
+openapi: 3.0.0
+info:
+  title: Credit Card Transactions API
+  description: "API for managing credit card transactions, including authorization, pre-authorization, and listing transactions."
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/OnlineBank/CreditCardTransactionAPI/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: https://api.example.com/v1
+  description: Production server
+- url: https://staging-api.example.com/v1
+  description: Staging server
+paths:
+  /transactions:
+    get:
+      summary: List all transactions
+      description: Retrieve a list of all credit card transactions.
+      parameters:
+      - name: customerId
+        in: query
+        description: Filter transactions by customer ID
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: "Filter transactions by status (e.g., Authorized, PreAuthorized, Captured)"
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: dateFrom
+        in: query
+        description: Filter transactions from a specific date
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+      - name: dateTo
+        in: query
+        description: Filter transactions up to a specific date
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+      responses:
+        "200":
+          description: A list of credit card transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+  /transactions/authorize:
+    post:
+      summary: Authorize a credit card transaction
+      description: Authorize a transaction for a specified amount on a customer's credit card.
+      requestBody:
+        description: Transaction authorization details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionAuthorization'
+        required: true
+      responses:
+        "201":
+          description: The authorized transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+  /transactions/preauthorize:
+    post:
+      summary: Pre-authorize a credit card transaction
+      description: Pre-authorize a transaction for a specified amount on a customer's credit card. Funds are held but not yet captured.
+      requestBody:
+        description: Transaction pre-authorization details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionPreAuthorization'
+        required: true
+      responses:
+        "201":
+          description: The pre-authorized transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+components:
+  schemas:
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the transaction
+        customerId:
+          type: string
+          description: Unique identifier for the customer
+        amount:
+          type: number
+          description: The amount of the transaction
+          format: double
+        currency:
+          type: string
+          description: "Currency code (e.g., USD, EUR)"
+        status:
+          type: string
+          description: "Status of the transaction (e.g., Authorized, PreAuthorized, Captured)"
+        date:
+          type: string
+          description: Date and time when the transaction occurred
+          format: date-time
+        merchant:
+          type: string
+          description: The merchant associated with the transaction
+        description:
+          type: string
+          description: A brief description of the transaction
+    TransactionAuthorization:
+      required:
+      - amount
+      - currency
+      - customerId
+      - merchant
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: Unique identifier for the customer
+        amount:
+          type: number
+          description: The amount to be authorized
+          format: double
+        currency:
+          type: string
+          description: "Currency code (e.g., USD, EUR)"
+        merchant:
+          type: string
+          description: The merchant associated with the transaction
+        description:
+          type: string
+          description: A brief description of the transaction
+    TransactionPreAuthorization:
+      required:
+      - amount
+      - currency
+      - customerId
+      - merchant
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: Unique identifier for the customer
+        amount:
+          type: number
+          description: The amount to be pre-authorized
+          format: double
+        currency:
+          type: string
+          description: "Currency code (e.g., USD, EUR)"
+        merchant:
+          type: string
+          description: The merchant associated with the transaction
+        description:
+          type: string
+          description: A brief description of the transaction

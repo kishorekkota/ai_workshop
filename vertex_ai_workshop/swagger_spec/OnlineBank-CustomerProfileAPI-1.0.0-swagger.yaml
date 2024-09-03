@@ -1,0 +1,161 @@
+openapi: 3.0.0
+
+info:
+  title: Customer Profile API
+  description: API for managing letters issued to a customer.
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/OnlineBank/CustomerProfileAPI/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: https://api.example.com/v1
+  description: Production server
+- url: https://staging-api.example.com/v1
+  description: Staging server
+paths:
+  /customerProfiles:
+    get:
+      summary: Get a list of customer profiles
+      description: Returns a list of all customer profiles.
+      responses:
+        "200":
+          description: A list of customer profiles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerProfile'
+    post:
+      summary: Create a new customer profile
+      description: Creates a new customer profile and returns the created profile.
+      requestBody:
+        description: Customer profile to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerProfileInput'
+        required: true
+      responses:
+        "201":
+          description: The created customer profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerProfile'
+  /customerProfiles/{id}:
+    get:
+      summary: Get a customer profile by ID
+      description: Returns a single customer profile by ID.
+      parameters:
+      - name: id
+        in: path
+        description: ID of the customer profile to retrieve
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A single customer profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerProfile'
+        "404":
+          description: Customer profile not found
+    put:
+      summary: Update a customer profile by ID
+      description: Updates an existing customer profile and returns the updated profile.
+      parameters:
+      - name: id
+        in: path
+        description: ID of the customer profile to update
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Customer profile to update
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerProfileInput'
+        required: true
+      responses:
+        "200":
+          description: The updated customer profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerProfile'
+        "404":
+          description: Customer profile not found
+    delete:
+      summary: Delete a customer profile by ID
+      description: Deletes a customer profile.
+      parameters:
+      - name: id
+        in: path
+        description: ID of the customer profile to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Customer profile deleted
+        "404":
+          description: Customer profile not found
+components:
+  schemas:
+    CustomerProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the customer profile
+        firstName:
+          type: string
+          description: First name of the customer
+        lastName:
+          type: string
+          description: Last name of the customer
+        email:
+          type: string
+          description: Email address of the customer
+        phoneNumber:
+          type: string
+          description: Phone number of the customer
+        address:
+          $ref: '#/components/schemas/Address'
+    CustomerProfileInput:
+      required:
+      - email
+      - firstName
+      - lastName
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: string

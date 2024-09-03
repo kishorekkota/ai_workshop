@@ -61,3 +61,13 @@ Langchain provides below advantages.
 LangGraph is a library for building stateful multi actor applications.
 
 
+
+
+
+## Terminology
+
+### Role
+
+What is a Role when working with OpenAI libraries for building a chat applications ?
+
+- ROLE defines context for GPT or any LLM to understand question better and provide relevant responses.

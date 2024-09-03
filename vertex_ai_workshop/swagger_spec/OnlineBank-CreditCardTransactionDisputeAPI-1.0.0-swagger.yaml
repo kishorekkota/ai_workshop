@@ -1,0 +1,191 @@
+openapi: 3.0.0
+info:
+  title: Credit Card Transaction Disputes API
+  description: API for managing disputes related to credit card transactions.
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/KISHOREKKOTA/CreditCardDisputesAPI/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: https://api.example.com/v1
+  description: Production server
+- url: https://staging-api.example.com/v1
+  description: Staging server
+paths:
+  /customers/{customerId}/disputes:
+    get:
+      summary: Get all disputes for a customer
+      description: Retrieve a list of all disputes filed by a specific customer for their credit card transactions.
+      parameters:
+      - name: customerId
+        in: path
+        description: ID of the customer
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A list of disputes filed by the customer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Dispute'
+    post:
+      summary: File a new dispute
+      description: File a new dispute for a specific credit card transaction.
+      parameters:
+      - name: customerId
+        in: path
+        description: ID of the customer
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Dispute details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisputeInput'
+        required: true
+      responses:
+        "201":
+          description: The created dispute
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dispute'
+  /customers/{customerId}/disputes/{disputeId}:
+    get:
+      summary: Get details of a specific dispute
+      description: Retrieve details of a specific dispute filed by the customer.
+      parameters:
+      - name: customerId
+        in: path
+        description: ID of the customer
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: disputeId
+        in: path
+        description: ID of the dispute to retrieve
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Details of the dispute
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dispute'
+        "404":
+          description: Dispute not found
+    put:
+      summary: Update a dispute
+      description: Update the details of an existing dispute.
+      parameters:
+      - name: customerId
+        in: path
+        description: ID of the customer
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: disputeId
+        in: path
+        description: ID of the dispute to update
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Updated dispute details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisputeInput'
+        required: true
+      responses:
+        "200":
+          description: The updated dispute
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dispute'
+        "404":
+          description: Dispute not found
+    delete:
+      summary: Delete a dispute
+      description: Delete a specific dispute filed by the customer.
+      parameters:
+      - name: customerId
+        in: path
+        description: ID of the customer
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: disputeId
+        in: path
+        description: ID of the dispute to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Dispute deleted successfully
+        "404":
+          description: Dispute not found
+components:
+  schemas:
+    Dispute:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the dispute
+        transactionId:
+          type: string
+          description: ID of the disputed credit card transaction
+        customerId:
+          type: string
+          description: Unique identifier for the customer
+        disputeDate:
+          type: string
+          description: Date when the dispute was filed
+          format: date-time
+        reason:
+          type: string
+          description: Reason for the dispute
+        status:
+          type: string
+          description: "Current status of the dispute (e.g., Pending, Resolved, Rejected)"
+    DisputeInput:
+      required:
+      - reason
+      - transactionId
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: ID of the disputed credit card transaction
+        reason:
+          type: string
+          description: Reason for the dispute
+        status:
+          type: string
+          description: "Current status of the dispute (e.g., Pending, Resolved, Rejected)"

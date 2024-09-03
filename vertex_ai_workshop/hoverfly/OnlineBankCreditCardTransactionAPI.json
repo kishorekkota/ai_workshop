@@ -1,0 +1,59 @@
+{
+  "data" : {
+    "pairs" : [ {
+      "request" : {
+        "path" : [ {
+          "value" : "/transactions/authorize",
+          "matcher" : "exact"
+        } ],
+        "method" : [ {
+          "value" : "POST",
+          "matcher" : "exact"
+        } ]
+      },
+      "response" : {
+        "status" : 201,
+        "templated" : false,
+        "encodedBody" : false
+      }
+    }, {
+      "request" : {
+        "path" : [ {
+          "value" : "/transactions/preauthorize",
+          "matcher" : "exact"
+        } ],
+        "method" : [ {
+          "value" : "POST",
+          "matcher" : "exact"
+        } ]
+      },
+      "response" : {
+        "status" : 201,
+        "templated" : false,
+        "encodedBody" : false
+      }
+    }, {
+      "request" : {
+        "path" : [ {
+          "value" : "/transactions",
+          "matcher" : "exact"
+        } ],
+        "method" : [ {
+          "value" : "GET",
+          "matcher" : "exact"
+        } ]
+      },
+      "response" : {
+        "status" : 200,
+        "templated" : false,
+        "encodedBody" : false
+      }
+    } ],
+    "globalActions" : {
+      "delays" : [ ]
+    }
+  },
+  "meta" : {
+    "schemaVersion" : "v5.3"
+  }
+}

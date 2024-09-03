@@ -1,0 +1,191 @@
+openapi: 3.0.0
+info:
+  title: Customer Letters API
+  description: API for managing letters issued to a customer.
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/OnlineBank/LettersAPI/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: https://api.example.com/v1
+  description: Production server
+- url: https://staging-api.example.com/v1
+  description: Staging server
+paths:
+  /customers/{customerId}/letters:
+    get:
+      summary: Get all letters for a customer
+      description: Retrieve a list of all letters issued to a specific customer.
+      parameters:
+      - name: customerId
+        in: path
+        description: ID of the customer
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A list of letters issued to the customer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Letter'
+    post:
+      summary: Issue a new letter to a customer
+      description: Create a new letter for the specified customer.
+      parameters:
+      - name: customerId
+        in: path
+        description: ID of the customer
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Letter to issue to the customer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LetterInput'
+        required: true
+      responses:
+        "201":
+          description: The created letter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Letter'
+  /customers/{customerId}/letters/{letterId}:
+    get:
+      summary: Get a specific letter issued to a customer
+      description: Retrieve a single letter issued to the specified customer by letter ID.
+      parameters:
+      - name: customerId
+        in: path
+        description: ID of the customer
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: letterId
+        in: path
+        description: ID of the letter to retrieve
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: The letter details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Letter'
+        "404":
+          description: Letter not found
+    put:
+      summary: Update a letter issued to a customer
+      description: Update the details of an existing letter issued to the specified customer.
+      parameters:
+      - name: customerId
+        in: path
+        description: ID of the customer
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: letterId
+        in: path
+        description: ID of the letter to update
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Updated letter details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LetterInput'
+        required: true
+      responses:
+        "200":
+          description: The updated letter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Letter'
+        "404":
+          description: Letter not found
+    delete:
+      summary: Delete a letter issued to a customer
+      description: Delete a specific letter issued to the specified customer.
+      parameters:
+      - name: customerId
+        in: path
+        description: ID of the customer
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: letterId
+        in: path
+        description: ID of the letter to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Letter deleted successfully
+        "404":
+          description: Letter not found
+components:
+  schemas:
+    Letter:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the letter
+        customerId:
+          type: string
+          description: Unique identifier for the customer
+        issueDate:
+          type: string
+          description: Date when the letter was issued
+          format: date-time
+        subject:
+          type: string
+          description: Subject of the letter
+        content:
+          type: string
+          description: The main content of the letter
+        status:
+          type: string
+          description: "Status of the letter (e.g., Sent, Draft, Cancelled)"
+    LetterInput:
+      required:
+      - content
+      - subject
+      type: object
+      properties:
+        subject:
+          type: string
+          description: Subject of the letter
+        content:
+          type: string
+          description: The main content of the letter
+        status:
+          type: string
+          description: "Status of the letter (e.g., Sent, Draft, Cancelled)"

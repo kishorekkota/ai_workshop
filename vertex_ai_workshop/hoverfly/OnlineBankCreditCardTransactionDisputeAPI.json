@@ -1,0 +1,91 @@
+{
+  "data" : {
+    "pairs" : [ {
+      "request" : {
+        "path" : [ {
+          "value" : "/customers/[^/]+/disputes",
+          "matcher" : "regex"
+        } ],
+        "method" : [ {
+          "value" : "GET",
+          "matcher" : "exact"
+        } ]
+      },
+      "response" : {
+        "status" : 200,
+        "templated" : false,
+        "encodedBody" : false
+      }
+    }, {
+      "request" : {
+        "path" : [ {
+          "value" : "/customers/[^/]+/disputes",
+          "matcher" : "regex"
+        } ],
+        "method" : [ {
+          "value" : "POST",
+          "matcher" : "exact"
+        } ]
+      },
+      "response" : {
+        "status" : 201,
+        "templated" : false,
+        "encodedBody" : false
+      }
+    }, {
+      "request" : {
+        "path" : [ {
+          "value" : "/customers/[^/]+/disputes/[^/]+",
+          "matcher" : "regex"
+        } ],
+        "method" : [ {
+          "value" : "DELETE",
+          "matcher" : "exact"
+        } ]
+      },
+      "response" : {
+        "status" : 204,
+        "templated" : false,
+        "encodedBody" : false
+      }
+    }, {
+      "request" : {
+        "path" : [ {
+          "value" : "/customers/[^/]+/disputes/[^/]+",
+          "matcher" : "regex"
+        } ],
+        "method" : [ {
+          "value" : "PUT",
+          "matcher" : "exact"
+        } ]
+      },
+      "response" : {
+        "status" : 200,
+        "templated" : false,
+        "encodedBody" : false
+      }
+    }, {
+      "request" : {
+        "path" : [ {
+          "value" : "/customers/[^/]+/disputes/[^/]+",
+          "matcher" : "regex"
+        } ],
+        "method" : [ {
+          "value" : "GET",
+          "matcher" : "exact"
+        } ]
+      },
+      "response" : {
+        "status" : 200,
+        "templated" : false,
+        "encodedBody" : false
+      }
+    } ],
+    "globalActions" : {
+      "delays" : [ ]
+    }
+  },
+  "meta" : {
+    "schemaVersion" : "v5.3"
+  }
+}
