@@ -45,8 +45,8 @@
       },
       "response" : {
         "status" : 200,
-        "templated" : false,
-        "encodedBody" : false
+        "encodedBody" : false,
+        "body" : "[ { \" id \" : \" 1 \" , \" amount \" : \" 100 \" , \" currency \" : \" USD \" , \" status \" : \" PENDING \" } ]"
       }
     } ],
     "globalActions" : {
