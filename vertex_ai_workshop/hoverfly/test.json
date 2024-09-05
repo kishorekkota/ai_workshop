@@ -1,0 +1,25 @@
+{
+    "data": [{
+        "response": {
+            "status": 200,
+            "body": "body here",
+            "encodedBody": false,
+            "headers": {
+                "Content-Type": ["text/html; charset=utf-8"]
+            }
+        },
+        "request": {
+            "requestType": "recording",
+            "path": "/",
+            "method": "GET",
+            "destination": "myhost.io",
+            "scheme": "https",
+            "query": "",
+            "body": "",
+            "headers": {
+                "Accept": ["text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"],
+                "User-Agent": ["Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"]
+            }
+        }
+    }]
+}   

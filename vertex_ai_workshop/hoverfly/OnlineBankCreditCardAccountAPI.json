@@ -14,6 +14,12 @@
               "value": "GET",
               "matcher": "exact"
             }
+          ],
+          "destination": [
+            {
+              "matcher": "glob",
+              "value": "?"
+            }
           ]
         },
         "response": {
@@ -35,6 +41,13 @@
               "value": "GET",
               "matcher": "exact"
             }
+          ],
+
+          "destination": [
+            {
+              "matcher": "glob",
+              "value": "?"
+            }
           ]
         },
         "response": {
@@ -55,6 +68,12 @@
             {
               "value": "GET",
               "matcher": "exact"
+            }
+          ],
+          "destination": [
+            {
+              "matcher": "glob",
+              "value": "?"
             }
           ]
         },
