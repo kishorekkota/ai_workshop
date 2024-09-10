@@ -46,7 +46,7 @@
       "response" : {
         "status" : 200,
         "encodedBody" : false,
-        "body" : "[ { \" id \" : \" 1 \" , \" amount \" : \" 100 \" , \" currency \" : \" USD \" , \" status \" : \" PENDING \" , \"date\" : ""} ]"
+        "body" : "[ { \"id\": \"TXN12345\", \"customerId\": \"CUST007\", \"amount\": 19.99, \"currency\": \"USD\", \"status\": \"Authorized\", \"date\": \"2023-12-25T14:32:17Z\", \"merchant\": \"Amazon.com\", \"description\": \"Purchase of a book\" }, { \"id\": \"TXN67890\", \"customerId\": \"CUST007\", \"amount\": 49.95, \"currency\": \"EUR\", \"status\": \"Captured\", \"date\": \"2024-01-10T18:15:42Z\", \"merchant\": \"Booking.com\", \"description\": \"Hotel reservation\" }, { \"id\": \"TXN11111\", \"customerId\": \"CUST005\", \"amount\": 34.99, \"currency\": \"USD\", \"status\": \"PreAuthorized\", \"date\": \"2024-02-15T11:20:30Z\", \"merchant\": \"Walmart\", \"description\": \"Grocery purchase\" } ]"
       }
     } ],
     "globalActions" : {

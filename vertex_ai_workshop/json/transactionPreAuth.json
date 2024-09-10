@@ -1,0 +1,7 @@
+{
+    "customerId": "CUST12345",
+    "amount": 99.99,
+    "currency": "USD",
+    "merchant": "OnlineRetailer",
+    "description": "Purchase of a new smartphone"
+}

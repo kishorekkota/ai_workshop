@@ -1,4 +1,5 @@
 openapi: 3.0.0
+
 info:
   title: Credit Card Transactions API
   description: "API for managing credit card transactions, including authorization, pre-authorization, and listing transactions."

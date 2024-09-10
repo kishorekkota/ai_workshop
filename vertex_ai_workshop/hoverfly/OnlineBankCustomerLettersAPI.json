@@ -14,7 +14,8 @@
       "response" : {
         "status" : 200,
         "templated" : false,
-        "encodedBody" : false
+        "encodedBody" : false,
+        "body" : "{ \"id\": \"letter-12345\", \"customerId\": \"customer-abc123\", \"issueDate\": \"2023-10-26T10:00:00Z\", \"subject\": \"Welcome to Our Services\", \"content\": \"Dear [Customer Name],\n\nWelcome to [Company Name]! We are excited to have you as a customer. This letter outlines our services and how to get started...\", \"status\": \"Sent\" }"
       }
     }, {
       "request" : {
@@ -30,7 +31,9 @@
       "response" : {
         "status" : 200,
         "templated" : false,
-        "encodedBody" : false
+        "encodedBody" : false,
+        "body" : "[ { \"id\": \"letter-12345\", \"customerId\": \"customer-abc123\", \"issueDate\": \"2023-10-26T10:00:00Z\", \"subject\": \"Welcome to Our Services\", \"content\": \"Dear [Customer Name],\n\nWelcome to [Company Name]! We are excited to have you as a customer. This letter outlines our services and how to get started...\", \"status\": \"Sent\" }, { \"id\": \"letter-67890\", \"customerId\": \"customer-def456\", \"issueDate\": \"2023-10-25T15:30:00Z\", \"subject\": \"Invoice #1234\", \"content\": \"Dear [Customer Name],\n\nPlease find attached your invoice for [Amount] for services rendered on [Date]. Payment is due within 30 days...\", \"status\": \"Sent\" }, { \"id\": \"letter-11122\", \"customerId\": \"customer-ghi789\", \"issueDate\": \"2023-10-27T09:15:00Z\", \"subject\": \"Reminder: Payment Due\", \"content\": \"Dear [Customer Name],\n\nThis is a friendly reminder that your invoice for [Amount] is due on [Date]. Please remit payment at your earliest convenience...\", \"status\": \"Sent\" }, { \"id\": \"letter-33445\", \"customerId\": \"customer-jkl012\", \"issueDate\": \"2023-10-24T17:45:00Z\", \"subject\": \"Account Update\", \"content\": \"Dear [Customer Name],\n\nThis letter is to inform you of an update to your account. [Explain the update]...\", \"status\": \"Draft\" }, { \"id\": \"letter-66778\", \"customerId\": \"customer-mno345\", \"issueDate\": \"2023-10-23T12:00:00Z\", \"subject\": \"Cancellation Request\", \"content\": \"Dear [Customer Name],\n\nWe have received your request to cancel your services. We are processing your request and will confirm the cancellation shortly...\", \"status\": \"Cancelled\" } ]"
+    
       }
     }, {
       "request" : {

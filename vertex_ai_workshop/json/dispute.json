@@ -1,0 +1,26 @@
+[
+    {
+      "id": "dispute-12345",
+      "transactionId": "txn-98765",
+      "customerId": "customer-abc123",
+      "disputeDate": "2023-10-26T10:30:00Z",
+      "reason": "Unauthorized transaction",
+      "status": "Pending"
+    },
+    {
+      "id": "dispute-67890",
+      "transactionId": "txn-45678",
+      "customerId": "customer-def456",
+      "disputeDate": "2023-10-20T15:15:00Z",
+      "reason": "Item not as described",
+      "status": "Resolved"
+    },
+    {
+      "id": "dispute-13579",
+      "transactionId": "txn-24680",
+      "customerId": "customer-ghi789",
+      "disputeDate": "2023-10-15T09:00:00Z",
+      "reason": "Duplicate transaction",
+      "status": "Rejected"
+    }
+  ]
